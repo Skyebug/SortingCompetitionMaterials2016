@@ -59,13 +59,13 @@ See the details of data generator in [DataGenerator2016.java](src/DataGenerator2
 For complete sample data file see [data1.txt](data1.txt). Its sorted output is in [out1.txt](out1.txt) file. 
 
 ## Setup for sorting
-The file [Group0.java](https://github.com/elenam/SortingCompetitionMaterials2015/blob/master/src/Group0.java) provides a template for the setup for your solution. Your class will be called `GroupN`, where `N` is the group number that is assigned to your group. The template class runs the sorting method once before the timing for the [JVM warmup](http://alexandru-ersenie.com/2010/09/12/important-aspects-in-load-performance-testing-1-server-warm-up/). It also pauses for 10ms before the actual test to let any leftover I/O to finish. Since the warmup and the actual sorting are done on the same array (for no reason other than simplicity), the array is cloned from the same input data. 
+The file [Group2.java](https://github.com/elenam/SortingCompetitionMaterials2015/blob/master/src/Group2.java) provides a template for the setup for your solution. Your class will be called `GroupN`, where `N` is the group number that is assigned to your group. The template class runs the sorting method once before the timing for the [JVM warmup](http://alexandru-ersenie.com/2010/09/12/important-aspects-in-load-performance-testing-1-server-warm-up/). It also pauses for 10ms before the actual test to let any leftover I/O to finish. Since the warmup and the actual sorting are done on the same array (for no reason other than simplicity), the array is cloned from the same input data.
 
 The data reading, the array cloning, the warmup sorting, and writing out the output are all outside of the timed portion of the method, and thus do not affect the total time. 
 
 Note that you may not use any global variables (other than the coordinates of the reference points that are already initialized for you; you may not change them). 
 
-The only method in the [Group0.java](src/Group0.java) files that you may modify is the `sort` method. It must take the array of points, each of which is in turn an array of 3 integers. The return type of the method can be what it is now, which is the same as the parameter type `int [][]`, or it can be a different array type. If you are sorting in-place, i.e. the sorted result is in the same array, then you can just return a reference to that array, as my prototype method does. If you are returning a different type of an array, the following rules have to be followed:
+The only method in the [Group2.java](src/Group2.java) files that you may modify is the `sort` method. It must take the array of points, each of which is in turn an array of 3 integers. The return type of the method can be what it is now, which is the same as the parameter type `int [][]`, or it can be a different array type. If you are sorting in-place, i.e. the sorted result is in the same array, then you can just return a reference to that array, as my prototype method does. If you are returning a different type of an array, the following rules have to be followed:
 * Your `sort` method return type needs to be changed to whatever  array you are returning, and consequently the type of `sorted` array in `main` needs to be changed. 
 * Your return type has to be an array (not an array list) and it has to have the same number of elements as the original array, one point per element. 
 * You need to supply a function to write out your result into a file. The file has to be exactly the same as in the prototype implementation; they will be compared using `diff` system command. 
@@ -74,7 +74,7 @@ If you are not changing the return type, you don't need to modify anything other
 
 Even though you are not modifying anything other than the `sort` method, you still need to submit your entire class: copy the template, rename the Java class to your group number, and change the`sort` method. You may use supplementary classes, just don't forget to submit them. Make sure to add your names in comments when you submit. 
 
-**Important:** if the sorting times may be too small to distinguish groups based on just one run of the sorting, so I may loop over the sorting section multiple times. If this is the case, I will let you know no later than a day after the preliminary competition and will modify `Group0` file accordingly.  
+**Important:** if the sorting times may be too small to distinguish groups based on just one run of the sorting, so I may loop over the sorting section multiple times. If this is the case, I will let you know no later than a day after the preliminary competition and will modify `Group2` file accordingly.
 
 ## Dates:
 

@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Group0 {
+public class Group2 {
 	private static int x1;
 	private static int y1;
 	private static int x2;
@@ -42,7 +42,7 @@ public class Group0 {
 		long start = System.currentTimeMillis();
 		
 		sorted = sort(toSort);
-		
+
 		long end = System.currentTimeMillis();
 		
 		System.out.println(end - start);
@@ -66,9 +66,86 @@ public class Group0 {
 	// You would need to provide your own function that prints your sorted array to 
 	// a while in the exact same format that my program outputs
 	private static int[][] sort(int[][] toSort) {
-		Arrays.sort(toSort, new PointComparator());
+
+		mergesort(toSort, 0, toSort.length);
+
 		return toSort;
+
 	}
+
+	public static void mergesort(int[][] values, int startIndex, int endIndex){
+
+		int rangeSize = endIndex - startIndex;
+
+		if (rangeSize >= 2) {
+			int midpoint =  (startIndex + endIndex) / 2;
+			mergesort(values, startIndex, midpoint);
+			mergesort(values, midpoint, endIndex);
+			merge(values,startIndex,midpoint,endIndex);
+		}
+
+	}//end mergesort
+
+	private static void merge(int[][] values, int startIndex, int midPoint,
+							  int endIndex) {
+    /*
+     * Assume that the two ranges are sorted:
+     *   (forall i | startIndex <= i <= j < midPoint : values[i] <= values[j])
+     *   (forall i | midPoint <= i <= j < endIndex : values[i] <= values[j])
+     * then merge them into a single sorted array, copy that back, and return.
+     */
+		final int rangeSize = endIndex - startIndex;
+		int[][] destination = new int[rangeSize][3];
+		int firstIndex = startIndex;
+		int secondIndex = midPoint;
+		int copyIndex = 0;
+		while (firstIndex < midPoint && secondIndex < endIndex) {
+
+			//if (values[firstIndex] < values[secondIndex])
+
+			double d1 = distance(values[firstIndex]);
+			double d2 = distance(values[secondIndex]);
+
+			if(d1 > d2){
+				destination[copyIndex] = values[firstIndex];
+				++firstIndex;
+			}
+			// Handle for equal distances and resolve by time stamp
+			else if(d1 == d2){
+				int t1 = values[firstIndex][2];
+				int t2 = values[secondIndex][2];
+
+				if(values[firstIndex][2] > values[secondIndex][2]){
+					destination[copyIndex] = values[firstIndex];
+					++firstIndex;
+				} else {
+					destination[copyIndex] = values[secondIndex];
+					++secondIndex;
+				}
+			}
+			else {
+				destination[copyIndex] = values[secondIndex];
+				++secondIndex;
+			}
+
+			++copyIndex;
+		}
+
+		while (firstIndex < midPoint) {
+			destination[copyIndex] = values[firstIndex];
+			++copyIndex;
+			++firstIndex;
+		}
+		while (secondIndex < endIndex) {
+			destination[copyIndex] = values[secondIndex];
+			++copyIndex;
+			++secondIndex;
+		}
+		for (int i = 0; i < rangeSize; ++i) {
+			values[i + startIndex] = destination[i];
+		}
+	}
+
 
 	private static int[][] readInData(String inputFileName) {
 		ArrayList<int[]> points = new ArrayList<int[]>();
@@ -105,13 +182,14 @@ public class Group0 {
 		return points.toArray(new int[counter][3]); // convert to array of int
 													// arrays
 	}
-	
+
 	private static void writeOutResult(int[][] sorted, String outputFilename) {
+
 		try {
 			PrintWriter out = new PrintWriter(outputFilename);
-			for (int[] point : sorted) {
-				out.println(point[0] + " " + point[1] + " " + point[2]);
-			}
+			for(int i = sorted.length - 1; i >= 0; i--)
+				out.println(sorted[i][0] + " " + sorted[i][1] + " " + sorted[i][2]);
+
 			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
