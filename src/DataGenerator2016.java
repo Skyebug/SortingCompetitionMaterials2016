@@ -23,7 +23,7 @@ public class DataGenerator2016 {
 		int defaultWalkMin = 10;
 		int defaultWalkMax =  500;
 		int defaultMaxSpeed = 100;
-		String filename = "nofile";
+		String filename = "test-data";
 		
 		// Reading main args
 		
