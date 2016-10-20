@@ -68,7 +68,7 @@ public class Group2 {
 	private static int[][] sort(int[][] toSort) {
 
 		mergesort(toSort, 0, toSort.length);
-
+		//Arrays.sort(toSort, new PointComparator());
 		return toSort;
 
 	}
@@ -103,8 +103,9 @@ public class Group2 {
 
 			//if (values[firstIndex] < values[secondIndex])
 
-			double d1 = distance(values[firstIndex]);
-			double d2 = distance(values[secondIndex]);
+			long d1 = distance(values[firstIndex]);
+			long d2 = distance(values[secondIndex]);
+			//System.out.println(d1 + " " + d2);
 
 			if(d1 > d2){
 				destination[copyIndex] = values[firstIndex];
@@ -204,22 +205,22 @@ public class Group2 {
 		}
 	}
 
-	private static double distance(int[] point) {
+	private static long distance(int[] point) {
 		// distance to the first point (set to 0 if too small):
-		double deltaX = x1 - point[0];
-		double deltaY = y1 - point[1];
+		long deltaX = x1 - point[0];
+		long  deltaY = y1 - point[1];
 		// beware of integer overflow! d1 has to be a double to accommodate large numbers
-		double d1 = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+		long d1 = (long) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 		if (d1 < threshold) {
-			d1 = 0.0;
+			d1 = 0;
 		}
 
 		// distance to the second point (set to 0 if too small):
 		deltaX = x2 - point[0];
 		deltaY = y2 - point[1];
-		double d2 = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+		long d2 = (long) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 		if (d2 < threshold) {
-			d2 = 0.0;
+			d2 = 0;
 		}
 
 		// the smaller of the two:
@@ -257,4 +258,8 @@ public class Group2 {
  		}
 
 	}
+
+	private static void fastMergeSort(int[][] a, int low, int high, int off){
+
+	}//end fastMergeSort
 }
