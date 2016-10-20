@@ -68,15 +68,18 @@ public class Group2 {
 
 		int[][] points = readInData(inputFileName);
 
+		//printArray(points, points.length);
 		//printArray(points, 100);
 
-		int[][] toSort = points.clone();
+		int[][] toSort = deepClone(points);//points.clone();
 
 		int[][] sorted = sort(toSort);
 
 		//printArray(sorted, 100);
 
-		toSort = points.clone();
+		toSort = deepClone(points);//points.clone();
+
+		//printArray(toSort, sorted.length);
 
 		Thread.sleep(10); //to let other things finish before timing; adds stability of runs
 
@@ -98,6 +101,17 @@ public class Group2 {
 		 System.out.println(distance(test2));
 		 **/
 
+	}
+
+	private static int[][] deepClone(int[][] toClone) {
+		int[][] clone = new int[toClone.length][];
+
+		int i = 0;
+		for (int[] point: toClone) {
+			clone[i++] = point.clone();
+		}
+
+		return clone;
 	}
 
 
